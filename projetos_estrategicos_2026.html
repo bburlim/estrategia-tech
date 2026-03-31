@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projetos Estratégicos 2026 — emiteai</title>
+<link rel="icon" type="image/png" href="https://emiteai.com.br/wp-content/uploads/2023/11/cropped-favsemfundo-270x270.png">
+<style>
+  /* ─── Reset & base ─────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #25233F;
+    --bg-card:  #2F2D4E;
+    --bg-dark:  #1C1A30;
+    --pink:     #FF6AA3;
+    --pink-dim: #cc4d7f;
+    --white:    #FFFFFF;
+    --gray:     #A0A0C0;
+    --green:    #4ABD7E;
+    --yellow:   #FFD060;
+    --red:      #FF6A6A;
+    --font:     'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #111;
+    font-family: var(--font);
+    overflow: hidden;
+  }
+
+  /* ─── Slideshow container ──────────────────────────────────────────────── */
+  #deck {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─── Each slide ───────────────────────────────────────────────────────── */
+  .slide {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease, transform .35s ease;
+    transform: translateX(60px);
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+  }
+
+  .slide.prev {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  /* ─── Pink bottom bar ──────────────────────────────────────────────────── */
+  .slide::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--pink);
+  }
+
+  /* ─── Slide counter ────────────────────────────────────────────────────── */
+  #counter {
+    position: fixed;
+    bottom: 20px; right: 32px;
+    color: var(--gray);
+    font-size: 13px;
+    letter-spacing: .05em;
+    z-index: 100;
+    user-select: none;
+  }
+
+  /* ─── Nav arrows ───────────────────────────────────────────────────────── */
+  .nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,106,163,.15);
+    border: 1px solid rgba(255,106,163,.3);
+    color: var(--pink);
+    font-size: 22px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+    user-select: none;
+  }
+  .nav-btn:hover { background: rgba(255,106,163,.3); }
+  #btn-prev { left: 16px; }
+  #btn-next { right: 16px; }
+
+  /* ─── Hint ─────────────────────────────────────────────────────────────── */
+  #hint {
+    position: fixed;
+    bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    color: var(--gray);
+    font-size: 12px;
+    opacity: .5;
+    z-index: 100;
+    user-select: none;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     SLIDE TYPES
+  ═══════════════════════════════════════════════════════════════════════ */
+
+  /* ─── CAPA ─────────────────────────────────────────────────────────────── */
+  .slide-cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 80px;
+  }
+
+  .slide-cover .logo {
+    position: absolute;
+    top: 36px; left: 80px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .slide-cover .logo-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--pink);
+  }
+
+  .slide-cover .logo-text {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .slide-cover .tag {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 20px;
+  }
+
+  .slide-cover h1 {
+    font-size: 62px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 28px;
+    letter-spacing: -.02em;
+  }
+
+  .slide-cover h1 span { color: var(--pink); }
+
+  .slide-cover .subtitle {
+    font-size: 18px;
+    color: var(--gray);
+    font-weight: 400;
+  }
+
+  .cover-deco {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 420px;
+    background: linear-gradient(135deg, #2F2D4E 0%, #1C1A30 100%);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .cover-deco-num {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 180px;
+    font-weight: 900;
+    color: rgba(255,106,163,.08);
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ─── VISÃO GERAL ──────────────────────────────────────────────────────── */
+  .slide-overview {
+    padding: 52px 80px 40px;
+  }
+
+  .slide-overview h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .slide-overview .divider {
+    width: 56px; height: 4px;
+    background: var(--pink);
+    border-radius: 2px;
+    margin-bottom: 36px;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 60px;
+  }
+
+  .overview-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    border-left: 3px solid var(--pink);
+    transition: background .2s;
+  }
+
+  .overview-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pink);
+    letter-spacing: .1em;
+    min-width: 28px;
+  }
+
+  .overview-name {
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .overview-item[data-goto] {
+    cursor: pointer;
+  }
+
+  .overview-item[data-goto]:hover {
+    background: #3a3860;
+    border-left-color: var(--pink);
+  }
+
+  .overview-item[data-goto]:hover .overview-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .overview-owner {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--gray);
+    white-space: nowrap;
+  }
+
+  .overview-arrow {
+    margin-left: 12px;
+    font-size: 16px;
+    color: var(--pink);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity .2s, transform .2s;
+  }
+
+  /* ─── SECTION HEADER ───────────────────────────────────────────────────── */
+  .slide-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 80px;
+  }
+
+  .section-num-bg {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 260px;
+    font-weight: 900;
+    color: rgba(255,106,163,.06);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .section-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    margin-bottom: 28px;
+    max-width: 680px;
+  }
+
+  .section-owner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--gray);
+  }
+
+  .section-owner .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--pink);
+    flex-shrink: 0;
+  }
+
+  /* ─── DETALHE DO PROJETO ───────────────────────────────────────────────── */
+  .slide-detail {
+    padding: 44px 80px 40px;
+    background: #FFFFFF;
+  }
+
+  /* barra rosa no rodapé mantida via ::after herdado do .slide */
+  .slide-detail::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--pink);
+  }
+
+  .detail-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .detail-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+
+  .detail-header h2 span { color: var(--pink); }
+
+  .status-badge {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    color: #fff;
+  }
+
+  .status-andamento { background: #38BDF8; }
+  .status-concluido { background: var(--green); }
+  .status-iniciar   { background: #F59E0B; }
+  .status-risco     { background: var(--red); }
+
+  .detail-divider {
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--pink) 0%, #e5e7eb 60%);
+    margin-bottom: 28px;
+  }
+
+  .meta-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .meta-card {
+    background: #F8F8FC;
+    border-radius: 10px;
+    padding: 16px 20px;
+    border-top: 2px solid var(--pink);
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+
+  .meta-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 8px;
+  }
+
+  .meta-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+
+  .momento-section h3 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+
+  .momento-box {
+    background: #F8F8FC;
+    border-radius: 10px;
+    padding: 22px 26px;
+    font-size: 15px;
+    color: #6b7280;
+    line-height: 1.7;
+    min-height: 130px;
+    border-left: 3px solid var(--pink);
+    font-style: italic;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+
+  .momento-box.filled {
+    color: #1a1a2e;
+    font-style: normal;
+  }
+
+  /* ─── ENCERRAMENTO ─────────────────────────────────────────────────────── */
+  .slide-end {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 72px 80px;
+  }
+
+  .slide-end h1 {
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -.03em;
+    margin-bottom: 20px;
+  }
+
+  .slide-end h1 span { color: var(--pink); }
+
+  .slide-end p {
+    font-size: 17px;
+    color: var(--gray);
+  }
+
+  .slide-end .end-line {
+    width: 60px; height: 4px;
+    background: var(--pink);
+    border-radius: 2px;
+    margin: 24px auto;
+  }
+
+  /* ─── Responsivo (escala proporcional) ─────────────────────────────────── */
+  @media (max-width: 1360px) {
+    #deck { transform-origin: center center; }
+  }
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+  <!-- ═══════════════════════════════════════════════════════
+       SLIDE 1 — CAPA
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-cover active" data-index="0">
+    <div class="cover-deco"></div>
+    <div class="cover-deco-num">8</div>
+
+    <div class="logo">
+      <img src="https://emiteai.com.br/wp-content/uploads/2023/11/LogoEmiteAi.svg"
+           alt="emiteai"
+           style="height:32px; filter: brightness(0) invert(1);"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div style="display:none; align-items:center; gap:10px;">
+        <div class="logo-dot"></div>
+        <span class="logo-text">emiteai</span>
+      </div>
+    </div>
+
+    <div class="tag">Tecnologia · 2026</div>
+    <h1>Projetos<br><span>Estratégicos</span></h1>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SLIDE 2 — VISÃO GERAL
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-overview" data-index="1">
+    <h2>Visão Geral dos Projetos</h2>
+    <div class="divider"></div>
+    <div class="overview-grid">
+
+      <div class="overview-item" data-goto="2">
+        <span class="overview-num">#01</span>
+        <span class="overview-name">Performance</span>
+        <span class="overview-owner">Braulio</span>
+        <span class="overview-arrow">→</span>
+      </div>
+
+      <div class="overview-item" data-goto="10">
+        <span class="overview-num">#05</span>
+        <span class="overview-name">Descomissionamento</span>
+        <span class="overview-owner">Heidi | Lemos</span>
+        <span class="overview-arrow">→</span>
+      </div>
+
+      <div class="overview-item" data-goto="4">
+        <span class="overview-num">#02</span>
+        <span class="overview-name">Custo Produto</span>
+        <span class="overview-owner">Braulio</span>
+        <span class="overview-arrow">→</span>
+      </div>
+
+      <div class="overview-item" data-goto="12">
+        <span class="overview-num">#06</span>
+        <span class="overview-name">Monitoramento</span>
+        <span class="overview-owner">Braulio | João</span>
+        <span class="overview-arrow">→</span>
+      </div>
+
+      <div class="overview-item" data-goto="6">
+        <span class="overview-num">#03</span>
+        <span class="overview-name">FinOps</span>
+        <span class="overview-owner">Lemos</span>
+        <span class="overview-arrow">→</span>
+      </div>
+
+      <div class="overview-item" data-goto="14">
+        <span class="overview-num">#07</span>
+        <span class="overview-name">IA para IPEFs (Layout Dinâmico)</span>
+        <span class="overview-owner">Heidi</span>
+        <span class="overview-arrow">→</span>
+      </div>
+
+      <div class="overview-item" data-goto="8">
+        <span class="overview-num">#04</span>
+        <span class="overview-name">Indicadores</span>
+        <span class="overview-owner">Braulio</span>
+        <span class="overview-arrow">→</span>
+      </div>
+
+      <div class="overview-item" data-goto="17">
+        <span class="overview-num">#08</span>
+        <span class="overview-name">Processo de Qualidade</span>
+        <span class="overview-owner">Braulio</span>
+        <span class="overview-arrow">→</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJETO 01 — PERFORMANCE
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-section" data-index="2">
+    <div class="section-num-bg">01</div>
+    <div class="section-label">Projeto 01 de 07</div>
+    <div class="section-title">Performance</div>
+    <div class="section-owner">
+      <div class="dot"></div>
+      Responsável: <strong style="color:var(--white)">Braulio</strong>
+    </div>
+  </div>
+
+  <div class="slide slide-detail" data-index="3">
+    <div class="detail-header">
+      <h2><span>#01</span> &nbsp;Performance</h2>
+      <span class="status-badge status-risco">Em risco</span>
+    </div>
+    <div class="detail-divider"></div>
+    <div class="meta-cards">
+      <div class="meta-card">
+        <div class="meta-label">Data de Início</div>
+        <div class="meta-value">25/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Previsão de Entrega (POC)</div>
+        <div class="meta-value">31/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Responsável</div>
+        <div class="meta-value">Braulio</div>
+      </div>
+    </div>
+    <div class="momento-section">
+      <h3>Momento Atual</h3>
+      <div class="momento-box filled">
+        Projeto criado com K6 e após validação da POC será possível integrar com o ambiente Azure para rodar os testes de performance. Cenário de emissão da Shopee foi criado porém ainda não validado, necessita de ajustes para funcionar.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJETO 02 — CUSTO PRODUTO
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-section" data-index="4">
+    <div class="section-num-bg">02</div>
+    <div class="section-label">Projeto 02 de 07</div>
+    <div class="section-title">Custo Produto</div>
+    <div class="section-owner">
+      <div class="dot"></div>
+      Responsável: <strong style="color:var(--white)">Braulio</strong>
+    </div>
+  </div>
+
+  <div class="slide slide-detail" data-index="5">
+    <div class="detail-header">
+      <h2><span>#02</span> &nbsp;Custo Produto</h2>
+      <span class="status-badge status-andamento">Em andamento</span>
+    </div>
+    <div class="detail-divider"></div>
+    <div class="meta-cards">
+      <div class="meta-card">
+        <div class="meta-label">Data de Início</div>
+        <div class="meta-value">25/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Entrega 1ª Versão</div>
+        <div class="meta-value">31/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Responsável</div>
+        <div class="meta-value">Braulio</div>
+      </div>
+    </div>
+    <div class="momento-section">
+      <h3>Momento Atual</h3>
+      <div class="momento-box filled">
+        Engine de Cálculo criada utilizando dados de quantidades de emissões, eventos e planilha Azure com custos especificados por Compute, Banco de Dados e repositórios de arquivos.
+      </div>
+    </div>
+    <div style="display:flex; gap:12px; margin-top:16px;">
+      <a href="Documentos/custo_produto.zip" download
+         style="display:inline-flex; align-items:center; gap:8px; background:#25233F; color:#fff; text-decoration:none;
+                font-size:13px; font-weight:600; padding:9px 18px; border-radius:8px; border:1px solid #FF6AA3;">
+        &#8595; Projeto (.zip)
+      </a>
+      <a href="Documentos/cost-report-2026-01-v2.html" target="_blank"
+         style="display:inline-flex; align-items:center; gap:8px; background:#FF6AA3; color:#fff; text-decoration:none;
+                font-size:13px; font-weight:600; padding:9px 18px; border-radius:8px;">
+        &#8599; Ver Relatório
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJETO 03 — FINOPS
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-section" data-index="6">
+    <div class="section-num-bg">03</div>
+    <div class="section-label">Projeto 03 de 07</div>
+    <div class="section-title">FinOps</div>
+    <div class="section-owner">
+      <div class="dot"></div>
+      Responsável: <strong style="color:var(--white)">Lemos</strong>
+    </div>
+  </div>
+
+  <div class="slide slide-detail" data-index="7">
+    <div class="detail-header">
+      <h2><span>#03</span> &nbsp;FinOps</h2>
+      <span class="status-badge status-andamento">Em andamento</span>
+    </div>
+    <div class="detail-divider"></div>
+    <div class="meta-cards">
+      <div class="meta-card">
+        <div class="meta-label">Data de Início</div>
+        <div class="meta-value">01/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Previsão de Entrega</div>
+        <div class="meta-value">Contínuo</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Responsável</div>
+        <div class="meta-value">Lemos</div>
+      </div>
+    </div>
+    <div class="momento-section">
+      <h3>Momento Atual</h3>
+      <div class="momento-box filled" style="font-style:normal;">
+        <strong style="color:#FF6AA3;">Entregas:</strong><br>
+        <span style="display:block; margin: 4px 0 0 8px;">① Reserva de máquinas — <span style="color:#4ABD7E; font-weight:600;">Concluído</span></span>
+        <span style="display:block; margin: 4px 0 8px 8px;">② Projeto de Eventos — <span style="color:#38BDF8; font-weight:600;">Em andamento</span> · previsão 06/04</span>
+        <strong style="color:#FF6AA3;">Próximos passos:</strong><br>
+        <span style="display:block; margin: 4px 0 0 8px; line-height:1.6;">Possibilidade de migrar outros ambientes para Clouds com incentivo; migrar de região todo o ambiente ou parcial (Entender sobre Sefaz). Conversa agendada com representante Microsoft para incentivos e possibilidades de redução de custo.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJETO 04 — INDICADORES
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-section" data-index="8">
+    <div class="section-num-bg">04</div>
+    <div class="section-label">Projeto 04 de 07</div>
+    <div class="section-title">Indicadores</div>
+    <div class="section-owner">
+      <div class="dot"></div>
+      Responsável: <strong style="color:var(--white)">Braulio</strong>
+    </div>
+  </div>
+
+  <div class="slide slide-detail" data-index="9">
+    <div class="detail-header">
+      <h2><span>#04</span> &nbsp;Indicadores</h2>
+      <span class="status-badge status-concluido">Concluído</span>
+    </div>
+    <div class="detail-divider"></div>
+    <div class="meta-cards">
+      <div class="meta-card">
+        <div class="meta-label">Data de Início</div>
+        <div class="meta-value">18/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Data de Entrega</div>
+        <div class="meta-value">25/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Responsável</div>
+        <div class="meta-value">Braulio</div>
+      </div>
+    </div>
+    <div class="momento-section">
+      <h3>Momento Atual</h3>
+      <div class="momento-box filled">
+        Projeto finalizado com conexão direta ao Jira para resgatar os dados e gerar os indicadores. Momento atual de refinamento e validação dos dados gerados usando a fonte do Jira e acompanhamento dos indicadores.
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <a href="https://indicadorestech-cz6fgzre2gstan7ugf.streamlit.app/" target="_blank"
+         style="display:inline-flex; align-items:center; gap:8px; background:#FF6AA3; color:#fff; text-decoration:none;
+                font-size:13px; font-weight:600; padding:9px 18px; border-radius:8px;">
+        &#8599; Acessar Dashboard
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJETO 05 — DESCOMISSIONAMENTO
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-section" data-index="10">
+    <div class="section-num-bg">05</div>
+    <div class="section-label">Projeto 05 de 07</div>
+    <div class="section-title">Descomissiona&shy;mento</div>
+    <div class="section-owner">
+      <div class="dot"></div>
+      Responsável: <strong style="color:var(--white)">Heidi | Lemos</strong>
+    </div>
+  </div>
+
+  <div class="slide slide-detail" data-index="11">
+    <div class="detail-header">
+      <h2><span>#05</span> &nbsp;Descomissionamento</h2>
+      <span class="status-badge status-andamento">Em andamento</span>
+    </div>
+    <div class="detail-divider"></div>
+    <div class="meta-cards">
+      <div class="meta-card">
+        <div class="meta-label">Data de Início</div>
+        <div class="meta-value">01/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Previsão de Entrega</div>
+        <div class="meta-value">Contínuo</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Responsável</div>
+        <div class="meta-value">Heidi | Lemos</div>
+      </div>
+    </div>
+    <div class="momento-section">
+      <h3>Momento Atual</h3>
+      <div class="momento-box filled">
+        <strong style="color:#FF6AA3;">Entregas:</strong><br>
+        <span style="display:block; margin: 4px 0 0 8px;">① Assinador XML — <span style="color:#4ABD7E; font-weight:600;">Concluído</span></span>
+        <span style="display:block; margin: 4px 0 8px 8px;">② Job Executor — <span style="color:#4ABD7E; font-weight:600;">Concluído</span></span>
+        <strong style="color:#FF6AA3;">Próximos passos:</strong><br>
+        <span style="display:block; margin: 4px 0 0 8px; line-height:1.6;">Apps para migrar para Go — Priorização e definição da linha do tempo de entregas.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJETO 06 — MONITORAMENTO
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-section" data-index="12">
+    <div class="section-num-bg">06</div>
+    <div class="section-label">Projeto 06 de 07</div>
+    <div class="section-title">Monitoramento</div>
+    <div class="section-owner">
+      <div class="dot"></div>
+      Responsável: <strong style="color:var(--white)">Braulio | João</strong>
+    </div>
+  </div>
+
+  <div class="slide slide-detail" data-index="13">
+    <div class="detail-header">
+      <h2><span>#06</span> &nbsp;Monitoramento</h2>
+      <span class="status-badge status-andamento">Em andamento</span>
+    </div>
+    <div class="detail-divider"></div>
+    <div class="meta-cards">
+      <div class="meta-card">
+        <div class="meta-label">Data de Início</div>
+        <div class="meta-value">23/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Previsão de Entrega (POC)</div>
+        <div class="meta-value">08/04/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Responsável</div>
+        <div class="meta-value">Braulio | João</div>
+      </div>
+    </div>
+    <div class="momento-section">
+      <h3>Momento Atual</h3>
+      <div class="momento-box filled">
+        Projeto criado e convertido de C# para GoLang com cobertura de testes unitários e com a possibilidade de notificar no Teams além do e-mail do suporte. Próximos passos: validar o projeto GoLang conectando e rodando um script em banco de dados para consumir os dados para disparo.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJETO 07 — IA PARA IPEFs
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-section" data-index="14">
+    <div class="section-num-bg">07</div>
+    <div class="section-label">Projeto 07 de 08</div>
+    <div class="section-title">IA para IPEFs<br><span style="color:var(--pink);font-size:.65em">Layout Dinâmico</span></div>
+    <div class="section-owner">
+      <div class="dot"></div>
+      Responsável: <strong style="color:var(--white)">Heidi</strong>
+    </div>
+  </div>
+
+  <div class="slide slide-detail" data-index="15">
+    <div class="detail-header">
+      <h2><span>#07</span> &nbsp;IA para IPEFs — Layout Dinâmico</h2>
+      <span class="status-badge status-iniciar">A iniciar</span>
+    </div>
+    <div class="detail-divider"></div>
+    <div class="meta-cards">
+      <div class="meta-card">
+        <div class="meta-label">Data de Início</div>
+        <div class="meta-value">06/04/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Previsão de Entrega</div>
+        <div class="meta-value">13/04/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Responsável</div>
+        <div class="meta-value">Heidi</div>
+      </div>
+    </div>
+    <div class="momento-section">
+      <h3>Momento Atual</h3>
+      <div class="momento-box filled">
+        Combinado com Produto: seguiremos com a estratégia de integrar 1 IPEF (Extratta) como POC. Validada essa etapa, seguimos com a integração das demais IPEFs sem o Layout Dinâmico. A ideia é reduzir o tempo de integração com a IA montando um projeto padrão e, rapidamente e sem muito esforço de desenvolvimento, integrar novas IPEFs.<br><br>
+        Levantamento e criação de histórias pelo time de produto das regras de negócio.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJETO 08 — PROCESSO DE QUALIDADE
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-section" data-index="17">
+    <div class="section-num-bg">08</div>
+    <div class="section-label">Projeto 08 de 08</div>
+    <div class="section-title">Processo de Qualidade</div>
+    <div class="section-owner">
+      <div class="dot"></div>
+      Responsável: <strong style="color:var(--white)">Braulio</strong>
+    </div>
+  </div>
+
+  <div class="slide slide-detail" data-index="18">
+    <div class="detail-header">
+      <h2><span>#08</span> &nbsp;Processo de Qualidade</h2>
+      <span class="status-badge status-andamento">Em andamento</span>
+    </div>
+    <div class="detail-divider"></div>
+    <div class="meta-cards">
+      <div class="meta-card">
+        <div class="meta-label">Data de Início</div>
+        <div class="meta-value">03/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Previsão de Entrega</div>
+        <div class="meta-value">31/03/2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">Responsável</div>
+        <div class="meta-value">Braulio</div>
+      </div>
+    </div>
+    <div class="momento-section">
+      <h3>Momento Atual</h3>
+      <div class="momento-box filled">
+        Processo de deploy com os combinados documentado e alinhados com o time de Tecnologia. No próximo quarter iremos acompanhar e buscar a meta atrelada a esse processo.
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <a href="Documentos/Processo_Deploy.pdf" target="_blank"
+         style="display:inline-flex; align-items:center; gap:8px; background:#FF6AA3; color:#fff; text-decoration:none;
+                font-size:13px; font-weight:600; padding:9px 18px; border-radius:8px;">
+        &#8599; Processo de Deploy (PDF)
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SLIDE FINAL
+  ══════════════════════════════════════════════════════════ -->
+  <div class="slide slide-end" data-index="19">
+    <h1>Obriga<span>do</span></h1>
+    <div class="end-line"></div>
+    <p style="color:var(--white); font-size:20px; font-weight:600; margin-bottom:8px;">Braulio Macêa</p>
+    <p style="color:var(--gray)">Tecnologia &nbsp;·&nbsp; emiteai.com.br</p>
+  </div>
+
+</div><!-- #deck -->
+
+<!-- ─── Controls ──────────────────────────────────────────────────────────── -->
+<button class="nav-btn" id="btn-prev">&#8592;</button>
+<button class="nav-btn" id="btn-next">&#8594;</button>
+<div id="counter"></div>
+<div id="hint">← → para navegar &nbsp;|&nbsp; F para tela cheia</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total  = slides.length;
+  let current  = 0;
+
+  function go(n) {
+    slides[current].classList.remove('active');
+    slides[current].classList.add('prev');
+    setTimeout(() => slides[current].classList.remove('prev'), 400);
+
+    current = Math.max(0, Math.min(total - 1, n));
+    slides[current].classList.add('active');
+    document.getElementById('counter').textContent = `${current + 1} / ${total}`;
+  }
+
+  // Clique nos itens do menu
+  document.querySelectorAll('.overview-item[data-goto]').forEach(item => {
+    item.addEventListener('click', () => go(parseInt(item.dataset.goto)));
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', () => go(current - 1));
+  document.getElementById('btn-next').addEventListener('click', () => go(current + 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault(); go(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault(); go(current - 1);
+    } else if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen()
+                                 : document.documentElement.requestFullscreen();
+    }
+  });
+
+  // Touch / swipe
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) go(dx < 0 ? current + 1 : current - 1);
+  }, { passive: true });
+
+  // Scale to fit window
+  function scale() {
+    const sw = window.innerWidth, sh = window.innerHeight;
+    const s  = Math.min(sw / 1280, sh / 720);
+    document.getElementById('deck').style.transform = `scale(${s})`;
+  }
+  window.addEventListener('resize', scale);
+  scale();
+
+  // Init counter
+  document.getElementById('counter').textContent = `1 / ${total}`;
+</script>
+</body>
+</html>
