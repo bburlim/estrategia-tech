@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório de Custo Unitário — 01/2026</title>
+  <style>
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1a1a2e;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 24px 16px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 40px 48px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #0f3460;
+  border-bottom: 3px solid #0f3460;
+  padding-bottom: 12px;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: #16213e;
+  border-bottom: 1px solid #dde3ed;
+  padding-bottom: 6px;
+  margin-top: 36px;
+}
+
+h3 {
+  font-size: 1rem;
+  color: #0f3460;
+  margin-top: 24px;
+}
+
+p { margin: 8px 0 12px; }
+
+a { color: #0f3460; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0 24px;
+  font-size: 13px;
+}
+
+thead tr {
+  background: #0f3460;
+  color: #fff;
+}
+
+thead th {
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(even) { background: #f0f4fb; }
+tbody tr:hover { background: #dde8f8; }
+
+td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+tbody tr:last-child td { font-weight: 600; background: #e8eef8; }
+
+code {
+  background: #f0f4fb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+}
+
+pre {
+  background: #1a1a2e;
+  color: #e2e8f0;
+  padding: 16px 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+blockquote {
+  border-left: 4px solid #0f3460;
+  margin: 16px 0;
+  padding: 8px 16px;
+  background: #f0f4fb;
+  border-radius: 0 6px 6px 0;
+  color: #444;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #dde3ed;
+  margin: 28px 0;
+}
+
+ul, ol { padding-left: 24px; }
+li { margin: 4px 0; }
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .container { box-shadow: none; padding: 20px; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+<h1 id="relatorio-de-custo-unitario-012026">Relatório de Custo Unitário — 01/2026</h1>
+<p><strong>Data:</strong> 2026-03-31
+<strong>Versão:</strong> 3.0 (substitui v2.1 — volumes corrigidos com valores reais de janeiro/2026)
+<strong>Período analisado:</strong> janeiro de 2026
+<strong>Responsável:</strong> engine custo_produto</p>
+<hr />
+<h2 id="1-resumo-executivo">1. Resumo executivo</h2>
+<h3 id="objetivo">Objetivo</h3>
+<p>Calcular o custo unitário de cloud (Azure) por documento fiscal emitido ou processado na plataforma, para o período de janeiro de 2026, utilizando critério de rateio multi-componente baseado em consumo técnico real.</p>
+<h3 id="escopo">Escopo</h3>
+<p>Produtos analisados: CT-e, GNRE, NFS-e, NF-e, MDF-e</p>
+<h3 id="conclusao-principal">Conclusão principal</h3>
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>Volume (docs/mês)</th>
+<th>Custo cloud total (R$)</th>
+<th>Custo unitário (R$/doc)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT-e</td>
+<td>42.621.423</td>
+<td>62.141,56</td>
+<td><strong>0,0014580</strong></td>
+</tr>
+<tr>
+<td>GNRE</td>
+<td>5.528.355</td>
+<td>5.510,88</td>
+<td><strong>0,0009968</strong></td>
+</tr>
+<tr>
+<td>NFS-e</td>
+<td>47.225</td>
+<td>273,86</td>
+<td><strong>0,0057991</strong></td>
+</tr>
+<tr>
+<td>NF-e</td>
+<td>211.213.030</td>
+<td>55.178,04</td>
+<td><strong>0,0002612</strong></td>
+</tr>
+<tr>
+<td>MDF-e</td>
+<td>101.839</td>
+<td>395,65</td>
+<td><strong>0,0038851</strong></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>259.511.872</strong></td>
+<td><strong>123.500,00</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Destaques:</strong>
+- CT-e ainda domina compute e storage (77,5% dos eventos), mas com volume menor o custo unitário subiu de R$0,0002056 para R$0,0014580 (+609%)
+- NF-e permanece com o menor custo unitário mesmo com volume reduzido — ainda concentra 81,4% dos documentos e absorve 81,4% do banco de dados
+- NFS-e tem o maior custo unitário (R$0,0057991) — volume pequeno não dilui os componentes de compute e storage
+- MDF-e sobe levemente (R$0,0038851 vs R$0,0036633) — volume mantido, mas % de database sobe com a queda do volume total
+- <strong>Esta análise cobre apenas custo de cloud. Custos diretos e demais indiretos não estão incluídos.</strong></p>
+<hr />
+<h2 id="2-mudanca-em-relacao-a-versao-anterior-v21">2. Mudança em relação à versão anterior (v2.1)</h2>
+<p>A v3.0 mantém o mesmo método multi-componente e a mesma distribuição de eventos/bytes da v2.1.
+A única alteração são os volumes de documentos, corrigidos com os valores reais de janeiro/2026.</p>
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>v2.1 Volume</th>
+<th>v3.0 Volume</th>
+<th>v2.1 Unit (R$/doc)</th>
+<th>v3.0 Unit (R$/doc)</th>
+<th>Variação unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT-e</td>
+<td>294.137.725</td>
+<td>42.621.423</td>
+<td>0,0002056</td>
+<td>0,0014580</td>
+<td>+609%</td>
+</tr>
+<tr>
+<td>GNRE</td>
+<td>12.020.898</td>
+<td>5.528.355</td>
+<td>0,0003986</td>
+<td>0,0009968</td>
+<td>+150%</td>
+</tr>
+<tr>
+<td>NFS-e</td>
+<td>390.138</td>
+<td>47.225</td>
+<td>0,0007781</td>
+<td>0,0057991</td>
+<td>+645%</td>
+</tr>
+<tr>
+<td>NF-e</td>
+<td>2.008.322.716</td>
+<td>211.213.030</td>
+<td>0,0000287</td>
+<td>0,0002612</td>
+<td>+810%</td>
+</tr>
+<tr>
+<td>MDF-e</td>
+<td>101.839</td>
+<td>101.839</td>
+<td>0,0036633</td>
+<td>0,0038851</td>
+<td>+6%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Por que os custos unitários subiram:</strong>
+- Os volumes reais de jan/2026 são significativamente menores que os usados em v2.1
+- O custo total de cloud permanece R$123.500 — a base fixa é diluída por menos documentos
+- MDF-e não mudou de volume, mas absorve levemente mais database/platform com o total menor
+- A distribuição de compute/storage/networking permanece idêntica (derivada dos eventos, não dos volumes)</p>
+<hr />
+<h2 id="3-metodo-de-custeio">3. Método de custeio</h2>
+<h3 id="classificacao-dos-custos">Classificação dos custos</h3>
+<ul>
+<li><strong>Custo direto:</strong> não utilizado nesta análise (decisão explícita)</li>
+<li><strong>Custo indireto:</strong> Azure/Cloud total = R$ 123.500,00/mês</li>
+</ul>
+<h3 id="nota-sobre-o-total-de-r-123500">Nota sobre o total de R$ 123.500</h3>
+<p>O export da Azure somou R$ 101.048,34. A diferença de R$ 22.451,66 (18,2%) corresponde a taxas e impostos incluídos na fatura. Os valores foram escalonados proporcionalmente (fator 1,2222) para refletir o custo real.</p>
+<h3 id="decomposicao-do-azure-escalonado">Decomposição do Azure escalonado</h3>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Valor (R$)</th>
+<th>%</th>
+<th>Critério de rateio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compute (VMs, AKS)</td>
+<td>29.030,71</td>
+<td>23,5%</td>
+<td>% de eventos processados</td>
+</tr>
+<tr>
+<td>Database (PostgreSQL)</td>
+<td>41.220,45</td>
+<td>33,4%</td>
+<td>% de volume de documentos</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>32.369,24</td>
+<td>26,2%</td>
+<td>% de tamanho dos eventos (bytes)</td>
+</tr>
+<tr>
+<td>Networking</td>
+<td>17.505,20</td>
+<td>14,2%</td>
+<td>% de tamanho dos eventos (bytes)</td>
+</tr>
+<tr>
+<td>Platform (DevOps, Monitor)</td>
+<td>3.374,39</td>
+<td>2,7%</td>
+<td>% de volume de documentos</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>123.500,00</strong></td>
+<td><strong>100%</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="criterios-de-rateio-por-componente">Critérios de rateio por componente</h3>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Critério</th>
+<th>Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compute</td>
+<td>Eventos processados (count)</td>
+<td>Proxy de CPU/processamento — mais eventos = mais compute</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Tamanho dos eventos (bytes)</td>
+<td>Proxy de dados armazenados e transferidos</td>
+</tr>
+<tr>
+<td>Networking</td>
+<td>Tamanho dos eventos (bytes)</td>
+<td>Proxy de tráfego de rede</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>Volume de documentos</td>
+<td>Proxy de footprint no banco — sem dado de GB por produto disponível</td>
+</tr>
+<tr>
+<td>Platform overhead</td>
+<td>Volume de documentos</td>
+<td>Distribuição flat, custos não atribuíveis diretamente</td>
+</tr>
+</tbody>
+</table>
+<p>Decisão formal registrada em: <code>.agents/decisions/2026-01-rateio-multi-criterio-cloud.md</code></p>
+<h3 id="fonte-dos-eventos">Fonte dos eventos</h3>
+<ul>
+<li>Arquivo: <code>grouped-jan-consolidated(Data).csv</code></li>
+<li>Cobertura: 1 semana</li>
+<li>Extrapolação: ×4 para o mês completo</li>
+<li>Premissa: a semana disponível é representativa do mês</li>
+</ul>
+<hr />
+<h2 id="4-dados-de-entrada">4. Dados de entrada</h2>
+<h3 id="volume-por-produto">Volume por produto</h3>
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>Volume (docs/mês)</th>
+<th>Fonte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT-e</td>
+<td>42.621.423</td>
+<td>Planilha financeira (corrigido v3.0)</td>
+</tr>
+<tr>
+<td>GNRE</td>
+<td>5.528.355</td>
+<td>Planilha financeira (corrigido v3.0)</td>
+</tr>
+<tr>
+<td>NFS-e</td>
+<td>47.225</td>
+<td>Planilha financeira (corrigido v3.0)</td>
+</tr>
+<tr>
+<td>NF-e</td>
+<td>211.213.030</td>
+<td>Planilha financeira (corrigido v3.0)</td>
+</tr>
+<tr>
+<td>MDF-e</td>
+<td>101.839</td>
+<td>Planilha financeira (mantido)</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>259.511.872</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="custo-indireto">Custo indireto</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Valor mensal (R$)</th>
+<th>Fonte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure/Cloud (total com taxas)</td>
+<td>123.500,00</td>
+<td>Planilha financeira</td>
+</tr>
+</tbody>
+</table>
+<h3 id="distribuicao-de-eventos-por-produto-extrapolado-mes-estimado">Distribuição de eventos por produto (extrapolado — mês estimado)</h3>
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>% eventos</th>
+<th>% tamanho (bytes)</th>
+<th>% volume (v3.0)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT-e</td>
+<td>77,5%</td>
+<td>64,8%</td>
+<td>16,42%</td>
+</tr>
+<tr>
+<td>GNRE</td>
+<td>4,2%</td>
+<td>6,7%</td>
+<td>2,13%</td>
+</tr>
+<tr>
+<td>NFS-e</td>
+<td>0,4%</td>
+<td>0,3%</td>
+<td>0,02%</td>
+</tr>
+<tr>
+<td>NF-e</td>
+<td>17,8%</td>
+<td>27,5%</td>
+<td>81,39%</td>
+</tr>
+<tr>
+<td>MDF-e</td>
+<td>0,1%</td>
+<td>0,7%</td>
+<td>0,04%</td>
+</tr>
+</tbody>
+</table>
+<p><em>% eventos e % bytes: inalterados (derivados do CSV de eventos).
+% volume: recalculado com os novos volumes reais.</em></p>
+<hr />
+<h2 id="5-resultado-detalhado-por-produto">5. Resultado detalhado por produto</h2>
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>Volume</th>
+<th>Compute (R$)</th>
+<th>Storage (R$)</th>
+<th>Networking (R$)</th>
+<th>Database (R$)</th>
+<th>Platform (R$)</th>
+<th>Total (R$)</th>
+<th>Unit (R$/doc)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT-e</td>
+<td>42.621.423</td>
+<td>22.498,80</td>
+<td>20.975,27</td>
+<td>11.343,37</td>
+<td>6.769,92</td>
+<td>554,20</td>
+<td>62.141,56</td>
+<td>0,0014580</td>
+</tr>
+<tr>
+<td>GNRE</td>
+<td>5.528.355</td>
+<td>1.219,29</td>
+<td>2.168,74</td>
+<td>1.172,85</td>
+<td>878,12</td>
+<td>71,88</td>
+<td>5.510,88</td>
+<td>0,0009968</td>
+</tr>
+<tr>
+<td>NFS-e</td>
+<td>47.225</td>
+<td>116,12</td>
+<td>97,11</td>
+<td>52,52</td>
+<td>7,50</td>
+<td>0,61</td>
+<td>273,86</td>
+<td>0,0057991</td>
+</tr>
+<tr>
+<td>NF-e</td>
+<td>211.213.030</td>
+<td>5.167,47</td>
+<td>8.901,54</td>
+<td>4.813,93</td>
+<td>33.548,74</td>
+<td>2.746,37</td>
+<td>55.178,04</td>
+<td>0,0002612</td>
+</tr>
+<tr>
+<td>MDF-e</td>
+<td>101.839</td>
+<td>29,03</td>
+<td>226,58</td>
+<td>122,54</td>
+<td>16,18</td>
+<td>1,32</td>
+<td>395,65</td>
+<td>0,0038851</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>259.511.872</strong></td>
+<td><strong>29.030,71</strong></td>
+<td><strong>32.369,24</strong></td>
+<td><strong>17.505,20</strong></td>
+<td><strong>41.220,45</strong></td>
+<td><strong>3.374,39</strong></td>
+<td><strong>123.499,99</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="validacao-cruzada">Validação cruzada</h3>
+<ul>
+<li>Soma dos totais por produto: R$ 123.499,99 ✅ (diferença de R$0,01 por arredondamento)</li>
+<li>Custo total ≥ custo direto (zero) para todos os produtos ✅</li>
+<li>Nenhum valor negativo ✅</li>
+<li>Nenhuma divisão por zero ✅</li>
+</ul>
+<hr />
+<h2 id="6-analise-dos-resultados">6. Análise dos resultados</h2>
+<h3 id="principais-drivers-por-produto">Principais drivers por produto</h3>
+<p><strong>CT-e</strong> — dominado por compute e storage (54% do custo do produto)
+- 77,5% dos eventos com 16,4% do volume — custo unitário R$0,0014580
+- Volume menor (42,6M vs 294M na v2.1) → mesma base de custo diluída em menos documentos</p>
+<p><strong>GNRE</strong> — storage continua o maior componente (39% do custo do produto)
+- Arquivos grandes (200 KB) geram alto footprint de storage
+- Custo unitário sobe para R$0,0009968 com volume menor (5,5M vs 12M na v2.1)</p>
+<p><strong>NFS-e</strong> — compute é o maior componente (42% do custo do produto)
+- Custo unitário mais alto: R$0,0057991 — volume pequeno (47k docs) não dilui os custos
+- Complexidade de integração municipal gera muitos eventos por documento</p>
+<p><strong>NF-e</strong> — banco de dados é o maior componente (61% do custo do produto)
+- 81,4% do volume → absorve R$33.549 dos R$41.220 de PostgreSQL
+- Custo unitário R$0,0002612 — menor da plataforma, beneficiado pela escala</p>
+<p><strong>MDF-e</strong> — storage é o maior componente (57% do custo do produto)
+- Volume mantido (101.839) — custo sobe levemente por maior absorção proporcional de database/platform</p>
+<hr />
+<h2 id="7-premissas">7. Premissas</h2>
+<ol>
+<li>Custo direto = R$ 0,00 — não incluído nesta análise por decisão explícita</li>
+<li>Total Azure = R$ 123.500,00, sendo R$ 22.451,66 de taxas/impostos não detalhados no export</li>
+<li>Eventos extrapolados de 1 semana × 4 — premissa de semana representativa do mês</li>
+<li>Critério de rateio de banco de dados: por volume (sem dado de GB por produto disponível)</li>
+<li>Eventos da categoria "Platform" (2,4% após validação do usuário) distribuídos proporcionalmente entre os produtos</li>
+<li>Mapeamento de event topics para produtos baseado em análise semântica validada pelo usuário</li>
+</ol>
+<hr />
+<h2 id="8-limitacoes">8. Limitações</h2>
+<ul>
+<li><strong>Custo parcial:</strong> apenas cloud. Custos diretos (provider fiscal, APIs, taxas bancárias GNRE) e demais indiretos (engenharia, suporte, monitoramento) não estão incluídos</li>
+<li><strong>Eventos de 1 semana:</strong> extrapolação assume semana típica. Meses com pico (ex: dezembro) podem variar</li>
+<li><strong>Database por volume:</strong> sem dado de GB por produto, o rateio do PostgreSQL por volume é uma aproximação. Com o dado de GB por cliente mapeado por produto, o resultado de NF-e (hoje dominante) poderia mudar</li>
+<li><strong>Platform events (2,4%):</strong> residual após validação do usuário em v2.1 — distribuídos proporcionalmente</li>
+<li><strong>Taxas/impostos Azure:</strong> R$ 22.451,66 distribuídos proporcionalmente ao custo líquido — podem ter distribuição diferente por tipo de serviço</li>
+</ul>
+<hr />
+<h2 id="9-nivel-de-confianca">9. Nível de confiança</h2>
+<p><strong>MÉDIA</strong> para o custo de cloud multi-critério</p>
+<ul>
+<li>Volume e custo Azure: confirmados ✅</li>
+<li>Eventos: 1 semana extrapolada, não mês completo ⚠️</li>
+<li>Rateio de banco: proxy por volume, não por GB real ⚠️</li>
+<li>Mapeamento de eventos: semântico, pode haver imprecisão em topics genéricos ⚠️</li>
+</ul>
+<hr />
+<h2 id="10-riscos">10. Riscos</h2>
+<ul>
+<li>Usar custo unitário cloud como custo total do produto — faltam componentes relevantes</li>
+<li>NFS-e e MDF-e com custo unitário alto podem pressionar pricing se não forem incluídos corretamente</li>
+<li>Variação sazonal nos eventos pode distorcer o rateio de compute/storage</li>
+<li>O rateio de banco favorece NF-e (menor por documento) por absorver o volume — se GB real for diferente, NF-e pode ficar mais caro</li>
+</ul>
+<hr />
+<h2 id="11-recomendacao-de-uso">11. Recomendação de uso</h2>
+<ul>
+<li>[x] Pode ser usado como referência operacional para o componente cloud</li>
+<li>[x] Usar com cautela para decisões de pricing — análise parcial</li>
+<li>[ ] Não usar como custo total até incluir custos diretos e demais indiretos</li>
+</ul>
+<hr />
+<h2 id="12-proximos-passos">12. Próximos passos</h2>
+<ol>
+<li>Incluir custos diretos por produto (provider fiscal, APIs, taxas bancárias GNRE)</li>
+<li>Incluir demais custos indiretos (engenharia, suporte, monitoramento)</li>
+<li>Obter dados de GB por produto no banco para refinar o rateio do PostgreSQL</li>
+<li>Obter eventos de um mês completo para eliminar a extrapolação</li>
+<li>Revisão humana antes de uso em decisão de pricing</li>
+</ol>
+<hr />
+<h2 id="13-observacoes-finais">13. Observações finais</h2>
+<p>A v3.0 corrige os volumes de documentos para os valores reais de janeiro/2026. O método permanece idêntico à v2.1 (multi-componente com critérios por ServiceFamily Azure). O impacto mais relevante é a elevação dos custos unitários em todos os produtos — com destaque para NF-e (+810%) e CT-e (+609%) — reflexo direto da redução de volume com custo fixo de cloud mantido em R$123.500.</p>
+  </div>
+</body>
+</html>
